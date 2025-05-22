@@ -13,7 +13,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @Component
 public class StockEventPublisherImpl implements StockEventPublisher {
     
-    private final List<StockEventListener> listeners = new CopyOnWriteArrayList<>();
+    private final List<StockEventListener> listeners = new CopyOnWriteArrayList<>(); // Usamos CopyOnWriteArrayList para evitar problemas de concurrencia
+    // en entornos multihilo. Esto es útil si varios hilos pueden suscribirse o desuscribirse al mismo tiempo.
+    // También es útil si varios hilos pueden publicar eventos al mismo tiempo.
     
     @Override
     public void subscribe(StockEventListener listener) {

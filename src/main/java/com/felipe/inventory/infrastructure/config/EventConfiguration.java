@@ -14,8 +14,8 @@ public class EventConfiguration {
     private final StockEventPublisher stockEventPublisher;
     private final LoggingStockEventListener loggingStockEventListener;
     
-    @Bean
-    public CommandLineRunner configureEventListeners() {
+    @Bean //serializable para poder recuperarlo
+    public CommandLineRunner configureEventListeners() { //público y sin parámetros, solo una vez al iniciar la aplicación
         return args -> {
             // Suscribir automáticamente el listener de logging al iniciar la aplicación
             stockEventPublisher.subscribe(loggingStockEventListener);

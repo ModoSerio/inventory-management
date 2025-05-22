@@ -15,16 +15,16 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Slf4j
+@Slf4j // Esta anotación crea automáticamente: private static final Logger log = LoggerFactory.getLogger(InventoryServiceImpl.class);
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor // Esta anotación genera un constructor con los atributos finales de la clase
 public class InventoryServiceImpl implements InventoryService {
     
     private final ProductRepository productRepository;
     private final MovementRepository movementRepository;
     private final StockEventPublisher eventPublisher;
     
-    private static final int LOW_STOCK_THRESHOLD = 5;
+    private static final int LOW_STOCK_THRESHOLD = 5; // Umbral de stock bajo
     
     @Override
     public int updateStock(Long productId, int quantity, boolean isEntry) {
@@ -55,7 +55,7 @@ public class InventoryServiceImpl implements InventoryService {
         product.setStock(newStock);
         productRepository.save(product);
         
-        if (newStock <= LOW_STOCK_THRESHOLD) {
+        if (newStock <= LOW_STOCK_THRESHOLD) { // Patrón Observer
             LowStockEvent event = new LowStockEvent(
                 product.getId(),
                 product.getName(),
