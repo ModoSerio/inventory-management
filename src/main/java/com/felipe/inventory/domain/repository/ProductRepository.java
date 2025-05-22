@@ -1,4 +1,4 @@
-package com.felipe.inventory.domain.respository;
+package com.felipe.inventory.domain.repository;
 
 import com.felipe.inventory.domain.model.Product;
 
